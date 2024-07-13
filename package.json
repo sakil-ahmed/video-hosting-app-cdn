@@ -1,0 +1,16 @@
+{
+  "name": "custom-script-with-percel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel main.js --hmr-port 50619",
+    "dev:video": "parcel video-hosting-app-cdn.js --hmr-port 50619"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
