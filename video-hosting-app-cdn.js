@@ -1,27 +1,42 @@
-document.querySelectorAll('[data-flowappz="video-popup-toggle-button"]').forEach((element) => {
+// Add player js cdn
+const script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = 'https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
+document.head.appendChild(script);
 
-    const popupOverlay = element.parentElement.querySelector('[data-flowappz="video-popup-overlay"]')
-    const popupVideo = element.parentElement.querySelector('[data-flowappz="flowappz-video"]')
 
-    element.addEventListener('click', () => {
-        if (popupOverlay) {
-            popupOverlay.style.display = 'flex'
-            popupVideo.classList.remove('close-video-popup')
-            popupVideo.classList.add('open-video-popup')
-        }
+script.onload = function () {
+    document.querySelectorAll('[data-flowappz="video-popup-toggle-button"]').forEach((element) => {
+
+        const popupOverlay = element.parentElement.querySelector('[data-flowappz="video-popup-overlay"]')
+        const popupVideo = element.parentElement.querySelector('[data-flowappz="flowappz-video"]')
+
+        const player = new playerjs.Player(popupVideo);
+
+        element.addEventListener('click', () => {
+
+            if (popupOverlay) {
+
+                popupOverlay.style.display = 'flex'
+                popupVideo.classList.remove('close-video-popup')
+                popupVideo.classList.add('open-video-popup')
+            }
+
+        })
+
+        document.addEventListener('click', (e) => {
+            if (e.target.contains(popupVideo)) {
+                popupVideo.classList.add('close-video-popup')
+                popupVideo.classList.remove('open-video-popup')
+                popupOverlay.style.display = 'none'
+                player.pause();
+            }
+
+        })
 
     })
+}
 
-    document.addEventListener('click', (e) => {
-        if (e.target.contains(popupVideo)) {
-            popupVideo.classList.add('close-video-popup')
-            popupVideo.classList.remove('open-video-popup')
-            popupOverlay.style.display = 'none'
-        }
-
-    })
-
-})
 
 const customStyle = `
 
